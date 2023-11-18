@@ -41,8 +41,9 @@ function Nav({
         position="bottom center"
       >
         {(close) => (
-          <div className="popUpMenu">
+          <div  className="popUpMenu">
             <Hamburger
+              data-testid='popMenu'
               conversation={conversation}
               setConversation={setConversation}
               conversationList={conversationList}

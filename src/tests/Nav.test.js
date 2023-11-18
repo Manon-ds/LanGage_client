@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import Nav from "../components/Nav";
 
 describe(Nav, () => {
@@ -11,12 +11,22 @@ describe(Nav, () => {
     expect(logo).toBeTruthy();
   });
 
-  it('should render hamburger menu', () => {
+  it("should render hamburger menu", () => {
     const { getByTestId } = render(
       <Nav conversation={1} conversationList={[1, 2, 3, 4]} />
     );
-    const hamburger = getByTestId('hamburger');
+    const hamburger = getByTestId("hamburger");
     expect(hamburger).toBeTruthy();
+  });
+
+  it('should open popup menu on click', () => {
+     const { getByTestId } = render(
+      <Nav conversation={1} conversationList={[1]} />
+    );
+    const hamburger = getByTestId("hamburger");
+    const popMenu = getByTestId('popMenu');
+    fireEvent.click(hamburger);
+    expect(popMenu).toBeTruthy();
   })
 
 
