@@ -29,10 +29,11 @@ function Hamburger({
             className="ConvoButton"
             onClick={() => handleClick(conversationList.length + 1)}
           >
-            Start New Conversation
+            Start New Conversation?
           </button>
         </li>
-        {conversationList.map((item) => {
+        { conversationList !== undefined ?
+        conversationList.map((item) => {
           return (
             <li className="hamListItem" key={item}>
               <button
@@ -47,7 +48,9 @@ function Hamburger({
               </button>
             </li>
           );
-        })}
+        }) : (
+          <h3> You have no current conversations.</h3>
+        )}
       </ul>
     </div>
   );
