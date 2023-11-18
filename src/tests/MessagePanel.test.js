@@ -3,8 +3,8 @@ import { render } from "@testing-library/react";
 import MessagePanel from "../components/MessagePanel";
 import { mockMessage } from "./mockMessage";
 
-describe(MessagePanel, () => {
-  it.skip('Should render a send button', () => {
+describe.skip(MessagePanel, () => {
+  it('Should render a send button', () => {
     const { getByClassName } = render(
       <MessagePanel conversation={1} messages={[mockMessage.message]} loading={false}  />
     );

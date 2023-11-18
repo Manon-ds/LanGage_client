@@ -41,7 +41,7 @@ function MessagePanel({
       };
       setInput("");
       setLoading(true);
-      const newMessage = await postUserMessage(inputWithProperties);
+        const newMessage = await postUserMessage(inputWithProperties);
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       const response = await gptReply(newMessage);
       if (response.content.includes("(")) {
