@@ -19,13 +19,33 @@ describe(Nav, () => {
     expect(hamburger).toBeInTheDocument();
   });
 
-  it('should open popup menu on click', () => {
-     const { getByTestId } = render(
+  it("should open popup menu on click", () => {
+    const { getByTestId } = render(
       <Nav conversation={2} conversationList={[1]} />
     );
     const hamburger = getByTestId("hamburger");
     fireEvent.click(hamburger);
-    const popMenu = getByTestId('popMenu');
+    const popMenu = getByTestId("popMenu");
     expect(popMenu).toBeInTheDocument();
+  });
+
+  it.skip("should render a new converstion when 'Start new conversation' clicked", () => {
+    const { getByTestId, getByText } = render(
+      <Nav conversation={1} conversationList={[1, 2, 3]} />
+    );
+
+    const hamburger = getByTestId("hamburger");
+    fireEvent.click(hamburger);
+
+    const newConvoButton = getByText('Start New Conversation?');
+    expect(newConvoButton).toBeInTheDocument();
+
+    fireEvent.click(newConvoButton);
+
+    const newChat = getByText("Chat 1");
+    expect(newChat).toBeTruthy();
+
+
+
   })
 });

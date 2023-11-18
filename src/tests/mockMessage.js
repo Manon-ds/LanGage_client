@@ -1,6 +1,6 @@
 export const mockMessage = {
   result: {
-    role: "user",
+    role: "usergit ",
     content: "Test Content",
     timestamp: Date.now(),
     conversationID: 1,
