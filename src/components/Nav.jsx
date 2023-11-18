@@ -10,7 +10,7 @@ function Nav({
   setConversationList,
 }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+// TODO Combine into one function.
   const handleOpen = () => {
     setIsMenuOpen(true);
   };
@@ -22,13 +22,13 @@ function Nav({
   return (
     <div className="Nav">
       <div className="logoContainer">
-        <Logo className="logo" />
+        <Logo data-testid="logo"  className="logo" />
       </div>
 
       <Popup
         className="popUpComponent"
         trigger={
-          <button className="hamburgerButton">
+          <button data-testid='hamburger' className="hamburgerButton">
             <div className={`hamburger ${isMenuOpen ? "active" : ""}`}>
               <span className="bar"></span>
               <span className="bar"></span>

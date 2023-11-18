@@ -1,3 +1,6 @@
+//TODO Organise components into their own folders with CSS included. Remove list of imports from App.js
+
+//TODO Look into setting state functions. Do we need a callback function? It doesn't seem like it.
 import "./App.css";
 import "./components/Nav.css";
 import "./components/MessagePanel.css";
