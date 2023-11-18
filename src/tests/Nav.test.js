@@ -8,7 +8,7 @@ describe(Nav, () => {
       <Nav conversation={1} conversationList={[1, 2, 3, 4]} />
     );
     const logo = getByTestId("logo");
-    expect(logo).toBeTruthy();
+    expect(logo).toBeInTheDocument();
   });
 
   it("should render hamburger menu", () => {
@@ -16,7 +16,7 @@ describe(Nav, () => {
       <Nav conversation={1} conversationList={[1, 2, 3, 4]} />
     );
     const hamburger = getByTestId("hamburger");
-    expect(hamburger).toBeTruthy();
+    expect(hamburger).toBeInTheDocument();
   });
 
   it('should open popup menu on click', () => {
@@ -25,7 +25,7 @@ describe(Nav, () => {
     );
     const hamburger = getByTestId("hamburger");
     fireEvent.click(hamburger);
-    const popMenu = getByTestId("popMenu");
-    expect(popMenu).toBeTruthy();
+    const popMenu = getByTestId('popMenu');
+    expect(popMenu).toBeInTheDocument();
   })
 });
