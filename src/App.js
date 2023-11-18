@@ -35,6 +35,7 @@ function App() {
   }, [conversation]);
 
   function handleUserMessageClick(message) {
+    console.log('message ', message)
     if (message && message.includes("(")) {
       const feedback = splitReply(message)[1];
       setFeedback(feedback);
