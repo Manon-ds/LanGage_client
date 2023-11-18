@@ -19,13 +19,15 @@ describe(Nav, () => {
     expect(hamburger).toBeInTheDocument();
   });
 
-  it("should open popup menu on click", () => {
-    const { getByTestId } = render(
+  it('should open popup menu on click', () => {
+     const { getByTestId } = render(
       <Nav conversation={1} conversationList={[1]} />
     );
     const hamburger = getByTestId("hamburger");
     fireEvent.click(hamburger);
-    const popMenu = getByTestId("popMenu");
+    const popMenu = getByTestId('popMenu');
     expect(popMenu).toBeInTheDocument();
-  });
+  })
+
+
 });
