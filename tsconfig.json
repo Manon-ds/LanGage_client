@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable"],
+    "jsx": "react",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "outDir": "./build"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/components/**/*.d.ts",
+    "src/components/Hamburger.jsx"
+  ],
+  "exclude": ["node_modules"]
+}
