@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ReactComponent as Logo } from "../assets/Logo no slogan.svg";
-import {PropTypes} from "../../propTypes"
+import { ConvoPropTypes } from "../../propTypes"
 import Hamburger from "./Hamburger";
 import Popup from "reactjs-popup";
 
@@ -9,7 +9,7 @@ function Nav({
   setConversation,
   conversationList,
   setConversationList,
-}: PropTypes) {
+}: ConvoPropTypes) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // TODO Combine into one function.
 
