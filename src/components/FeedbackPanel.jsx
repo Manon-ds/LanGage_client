@@ -13,6 +13,7 @@ function FeedbackPanel({
   conversation,
   conversationList,
 }) {
+  console.log("feedback:" + feedback);
   const [mascot, setMascot] = useState(RobotHappy);
 
   useEffect(() => {
@@ -30,10 +31,12 @@ function FeedbackPanel({
   return (
     <div className="FeedbackPanel">
       <div className="feedbackBox">
-        <h1 className="feedbackHeader">Feedback board</h1>
-        <ul className="feedbackList">
+        <h1 data-testid="feedBackH1" className="feedbackHeader">
+          Feedback board
+        </h1>
+        <ul data-testid="testfeedBackUL" className="feedbackList">
           {feedback[0].length === 0 ? (
-            <li>{messages.length === 0 ? "" : "Keep up the good work!"}</li>
+            <li data-testid="emptyLI" >{messages.length === 0 ? "" : "Keep up the good work!"}</li>
           ) : (
             feedback.map((str) => {
               return <li key={feedback.indexOf(str)}>{str}</li>;
@@ -41,7 +44,7 @@ function FeedbackPanel({
           )}
         </ul>
       </div>
-      <div className="tutor">
+      <div data-testid="robotTutor" className="tutor">
         {loading ? (
           <RobotThink className="tutorImg" />
         ) : (

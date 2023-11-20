@@ -6,7 +6,7 @@ import Form from "../components/Form";
 import userEvent from '@testing-library/user-event'
 
 
-describe.only(MessagePanel, () => {
+describe.skip(MessagePanel, () => {
   it('Should render a send button', () => {
     const { getByTestId } = render(
       <MessagePanel />

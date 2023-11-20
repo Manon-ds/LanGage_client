@@ -11,7 +11,6 @@ function Nav({
   setConversationList,
 }: ConvoPropTypes) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // TODO Combine into one function.
 
   const handleOpen = () => {
     setIsMenuOpen(true);
