@@ -15,7 +15,8 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/components/**/*.d.ts",
-    "src/components/Hamburger.jsx"
+    "src/components/Hamburger.jsx",
+    "node_modules/react-scripts/lib/react-app.d.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["propTypes.ts"]
 }

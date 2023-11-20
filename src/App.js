@@ -8,7 +8,7 @@ import "./components/FeedbackPanel.css";
 import "./components/Messages.css";
 import "./components/Hamburger.css";
 import "./components/popups.css";
-import Nav from "./components/Nav.jsx";
+import Nav from "./components/Nav.tsx";
 import FeedbackPanel from "./components/FeedbackPanel.jsx";
 import MessagePanel from "./components/MessagePanel.jsx";
 import { getPrevMessages } from "./apiService.js";

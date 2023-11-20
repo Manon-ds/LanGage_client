@@ -21,11 +21,12 @@ describe(Nav, () => {
 
   it("should open popup menu on click", () => {
     const { getByTestId } = render(
-      <Nav conversation={2} conversationList={[1]} />
+      <Nav conversation={1} conversationList={[1]} />
     );
     const hamburger = getByTestId("hamburger");
     fireEvent.click(hamburger);
     const popMenu = getByTestId("popMenu");
+    console.log(popMenu);
     expect(popMenu).toBeInTheDocument();
   });
 

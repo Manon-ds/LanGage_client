@@ -1,24 +1,17 @@
-import React,{useState, ReactElement, ReactNode} from "react";
+import React, { useState } from "react";
 import { ReactComponent as Logo } from "../assets/Logo no slogan.svg";
+import {PropTypes} from "../../propTypes"
 import Hamburger from "./Hamburger";
 import Popup from "reactjs-popup";
-
-type NavProps = {
-  conversation: number;
-  setConversation: (value: number) => void;
-  conversationList: number[];
-  setConversationList: (value: number) => void;
-};
 
 function Nav({
   conversation,
   setConversation,
   conversationList,
   setConversationList,
-}: NavProps)   {
+}: PropTypes) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // TODO Combine into one function.
-
 
   const handleOpen = () => {
     setIsMenuOpen(true);
@@ -27,25 +20,6 @@ function Nav({
   const handleClose = () => {
     setIsMenuOpen(false);
   };
-
-  const popupContent: ReactNode = (
-    <div data-testid="popMenu" className="popUpMenu">
-    <Hamburger
-      conversation={conversation}
-      setConversation={setConversation}
-      conversationList={conversationList}
-      setConversationList={setConversationList}
-    />
-    <div className="closeButtonContainer">
-      <button className="closeButton" onClick={() => close()}>
-        Close
-      </button>
-    </div>
-  </div>
-
-  )
-
-
 
   return (
     <div className="Nav">
@@ -68,7 +42,21 @@ function Nav({
         onClose={handleClose}
         position="bottom center"
       >
-        {popupContent}
+        {isMenuOpen && (
+          <div data-testid="popMenu" className="popUpMenu">
+            <Hamburger
+              conversation={conversation}
+              setConversation={setConversation}
+              conversationList={conversationList}
+              setConversationList={setConversationList}
+            />
+            <div className="closeButtonContainer">
+              <button className="closeButton" onClick={handleClose}>
+                Close
+              </button>
+            </div>
+          </div>
+        )}
       </Popup>
     </div>
   );
