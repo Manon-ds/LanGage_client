@@ -21,6 +21,7 @@ function App() {
   const [feedback, setFeedback] = useState([""]);
   const [loading, setLoading] = useState(false);
   const [conversationList, setConversationList] = useState([]);
+  console.log(messages);
 
   useEffect(() => {
     getPrevMessages(conversation)
