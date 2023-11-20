@@ -1,6 +1,7 @@
-import { ReactComponent as LogoL } from "../assets/Logo L.svg";
+// import { ReactComponent as LogoL } from "../assets/Logo L.svg";
 import { useState, useEffect, useRef } from "react";
 import Messages from "./Messages.jsx";
+import Form from "./Form.jsx";
 import { gptReply, postUserMessage } from "../apiService.js";
 import { splitReply } from "../util.js";
 
@@ -14,7 +15,6 @@ function MessagePanel({
   handleUserMessageClick,
 }) {
   const [input, setInput] = useState("");
-
   const messageEl = useRef(null);
 
   // apprently Listener for synchronous DOMNodeInserted event is being deprecated? Working but this will need adjustment...
@@ -41,14 +41,17 @@ function MessagePanel({
       };
       setInput("");
       setLoading(true);
-        const newMessage = await postUserMessage(inputWithProperties);
+      const newMessage = await postUserMessage(inputWithProperties);
+
       setMessages((prevMessages) => [...prevMessages, newMessage]);
+
       const response = await gptReply(newMessage);
       if (response.content.includes("(")) {
         const feedback = splitReply(response.content)[1];
         setFeedback(feedback);
       }
       setMessages((prevMessages) => [...prevMessages, response]);
+
       setLoading(false);
     } catch (e) {
       console.log(e);
@@ -58,9 +61,9 @@ function MessagePanel({
   return (
     <div className="MessagePanel">
       <div className="messages-container" ref={messageEl}>
-        {messages.map((message) => {
+        {messages?.map((message) => {
           return (
-            <Messages
+            <Messages data-testid = 'message'
               key={message._id}
               message={message}
               setFeedback={setFeedback}
@@ -69,22 +72,8 @@ function MessagePanel({
           );
         })}
       </div>
-      <form className="userInput" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="inputField"
-          className="inputField"
-          value={input}
-          onChange={handleChange}
-          required
-          placeholder={loading ? "Please wait..." : "Type here..."}
-          disabled={loading}
-        />
+      <Form handleSubmit={handleSubmit} handleChange={handleChange} loading={loading} input={input} />
 
-        <button type="submit" className="send-button">
-          <LogoL title="Send" className="buttonImg" />
-        </button>
-      </form>
     </div>
   );
 }

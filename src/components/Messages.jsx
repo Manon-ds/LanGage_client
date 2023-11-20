@@ -9,6 +9,7 @@ function Messages({ message, handleUserMessageClick }) {
   const [textTranslation, setTextTranslation] = useState(null);
   const messageContent = splitReply(message.content)[0];
 
+
   function handleWordClick(word) {
     const cleanedWord = word.replace(/[^\w\sÀ-ÖØ-öø-ÿ]/g, "");
     setSelectedText(cleanedWord);
@@ -34,7 +35,7 @@ function Messages({ message, handleUserMessageClick }) {
   }
 
   return (
-    <div className="Messages">
+    <div className="Messages" >
       <div
         className={message.role === "user" ? "userM message" : "tutorM message"}
       >
