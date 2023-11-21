@@ -1,8 +1,9 @@
-import { ReactComponent as RobotPoint } from "../assets/pointing-robot.svg";
-import { ReactComponent as RobotBook } from "../assets/book-robot.svg";
-import { ReactComponent as RobotThink } from "../assets/thinking-robot.svg";
-import { ReactComponent as RobotHappy } from "../assets/happy-robot.svg";
-import { ReactComponent as RobotLetter } from "../assets/letter-robot.svg";
+// TODO: Refactor SVG into paths to use in img elements.
+import RobotPointSVG from "../assets/pointing-robot.svg";
+import RobotThinkSVG from "../assets/thinking-robot.svg";
+import RobotBookSVG from "../assets/book-robot.svg";
+import RobotHappySVG from "../assets/happy-robot.svg";
+import RobotLetterSVG from "../assets/letter-robot.svg";
 import { useState, useEffect } from "react";
 import React from "react";
 import { FeedbackTypes } from "../../propTypes";
@@ -14,18 +15,17 @@ function FeedbackPanel({
   loading,
   conversationList,
 }: FeedbackTypes) {
-  console.log("feedback:" + feedback);
-  const [mascot, setMascot] = useState<React.ReactNode>(<RobotHappy />);
+  const [mascot, setMascot] = useState<string>(RobotHappySVG);
 
   useEffect(() => {
     if (conversation === conversationList.length + 1 && messages.length === 0) {
-      setMascot(<RobotBook />);
+      setMascot(RobotBookSVG);
     } else if (feedback[0].length === 0) {
-      setMascot(<RobotLetter />);
+      setMascot(RobotLetterSVG);
     } else if (feedback[0].length !== 0) {
-      setMascot(<RobotPoint />);
+      setMascot(RobotPointSVG);
     } else {
-      setMascot(<RobotHappy />);
+      setMascot(RobotHappySVG);
     }
   }, [feedback, conversation, messages]);
 
@@ -47,8 +47,17 @@ function FeedbackPanel({
           )}
         </ul>
       </div>
-      <div data-testid="robotTutor" className="tutor">
-        {loading ? <RobotThink className="tutorImg" /> : mascot }
+      {/* // TODO add data-testid to the image, */}
+      <div className="tutor">
+        {loading ? (
+          <img
+            src={RobotThinkSVG}
+            className="tutorImg"
+            data-testid="loadingRobotTutor"
+          />
+        ) : (
+          <img src={mascot} className="tutorImg" data-testid="robotTutor" />
+        )}
       </div>
     </div>
   );

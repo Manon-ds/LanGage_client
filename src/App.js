@@ -9,7 +9,7 @@ import "./components/Messages.css";
 import "./components/Hamburger.css";
 import "./components/popups.css";
 import Nav from "./components/Nav.tsx";
-import FeedbackPanel from "./components/FeedbackPanel.jsx";
+import FeedbackPanel from "./components/FeedbackPanel.tsx";
 import MessagePanel from "./components/MessagePanel.jsx";
 import { getPrevMessages } from "./apiService.js";
 import { useState, useEffect } from "react";

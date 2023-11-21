@@ -18,7 +18,7 @@ describe.only(FeedbackPanel, () => {
     expect(feedBackH1).toBeInTheDocument();
   });
 
-  it("should display a Robot", () => {
+  it.only("should display a Robot", async () => {
     const { getByTestId } = render(
       <FeedbackPanel
         feedback={["feedback 1", "feedback 2"]}
@@ -28,7 +28,22 @@ describe.only(FeedbackPanel, () => {
         conversationList={[1]}
       />
     );
-    const robotTutor = getByTestId("robotTutor");
+    await waitFor(() => {
+      expect(getByTestId("robotTutor")).toBeInTheDocument();
+    });
+  });
+
+  it("should display the loading Robot when loading", () => {
+    const { getByTestId } = render(
+      <FeedbackPanel
+        feedback={["feedback 1", "feedback 2"]}
+        loading="true"
+        messages={[mockMessage.message]}
+        conversation={1}
+        conversationList={[1]}
+      />
+    );
+    const robotTutor = getByTestId("loadingRobotTutor");
     expect(robotTutor).toBeInTheDocument();
   });
 
@@ -45,9 +60,10 @@ describe.only(FeedbackPanel, () => {
     await waitFor(() => {
       expect(getByTestId("testfeedBackUL")).toBeInTheDocument();
     });
+
   });
 
-  it('should not display feedback when there is no messages or feedback', () => {
+  it("should not display feedback when there is no messages or feedback", () => {
     const { getByTestId } = render(
       <FeedbackPanel
         feedback={[""]}
@@ -59,5 +75,5 @@ describe.only(FeedbackPanel, () => {
     );
     const emptyLI = getByTestId("emptyLI");
     expect(emptyLI).toBeInTheDocument();
-  })
+  });
 });
