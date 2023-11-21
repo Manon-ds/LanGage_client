@@ -43,7 +43,7 @@ describe(Nav, () => {
 
     fireEvent.click(newConvoButton);
 
-    const newChat = getByText("Chat 1");
+    const newChat = getByText("Chat 2");
     expect(newChat).toBeTruthy();
   })
 });
