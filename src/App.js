@@ -10,7 +10,7 @@ import "./components/Hamburger.css";
 import "./components/popups.css";
 import Nav from "./components/Nav.tsx";
 import FeedbackPanel from "./components/FeedbackPanel.jsx";
-import MessagePanel from "./components/MessagePanel.jsx";
+import MessagePanel from "./components/MessagePanel.tsx";
 import { getPrevMessages } from "./apiService.js";
 import { useState, useEffect } from "react";
 import { splitReply } from "./util.js";
@@ -21,7 +21,6 @@ function App() {
   const [feedback, setFeedback] = useState([""]);
   const [loading, setLoading] = useState(false);
   const [conversationList, setConversationList] = useState([]);
-  console.log(messages);
 
   useEffect(() => {
     getPrevMessages(conversation)
@@ -36,7 +35,6 @@ function App() {
   }, [conversation]);
 
   function handleUserMessageClick(message) {
-    console.log('message ', message)
     if (message && message.includes("(")) {
       const feedback = splitReply(message)[1];
       setFeedback(feedback);
