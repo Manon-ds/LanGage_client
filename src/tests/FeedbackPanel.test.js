@@ -3,12 +3,12 @@ import { render, waitFor } from "@testing-library/react";
 import FeedbackPanel from "../components/FeedbackPanel";
 import { mockMessage } from "./mockMessage";
 
-describe.only(FeedbackPanel, () => {
+describe(FeedbackPanel, () => {
   it("should display a header stating 'Feedback Board'", () => {
     const { getByTestId } = render(
       <FeedbackPanel
         feedback={["feedback 1", "feedback 2"]}
-        loading="false"
+        loading={false}
         messages={[mockMessage.message]}
         conversation={1}
         conversationList={[1]}
@@ -18,26 +18,24 @@ describe.only(FeedbackPanel, () => {
     expect(feedBackH1).toBeInTheDocument();
   });
 
-  it.only("should display a Robot", async () => {
+  it("should display a Robot", () => {
     const { getByTestId } = render(
       <FeedbackPanel
         feedback={["feedback 1", "feedback 2"]}
-        loading="false"
+        loading={false}
         messages={[mockMessage.message]}
         conversation={1}
         conversationList={[1]}
       />
     );
-    await waitFor(() => {
-      expect(getByTestId("robotTutor")).toBeInTheDocument();
-    });
+    expect(getByTestId("robotTutor")).toBeInTheDocument();
   });
 
   it("should display the loading Robot when loading", () => {
     const { getByTestId } = render(
       <FeedbackPanel
         feedback={["feedback 1", "feedback 2"]}
-        loading="true"
+        loading={true}
         messages={[mockMessage.message]}
         conversation={1}
         conversationList={[1]}
@@ -51,7 +49,7 @@ describe.only(FeedbackPanel, () => {
     const { getByTestId } = render(
       <FeedbackPanel
         feedback={["feedback 1", "feedback 2"]}
-        loading="false"
+        loading={false}
         messages={[mockMessage.message]}
         conversation={1}
         conversationList={[1]}
@@ -63,11 +61,25 @@ describe.only(FeedbackPanel, () => {
 
   });
 
-  it("should not display feedback when there is no messages or feedback", () => {
+  it("should display feedback when there are messages or feedback", () => {
+    const { getAllByTestId } = render(
+      <FeedbackPanel
+      feedback={["feedback 1", "feedback 2"]}
+      loading={false}
+      messages={[mockMessage.message]}
+      conversation={1}
+      conversationList={[1]}
+      />
+    );
+    const emptyLI = getAllByTestId("feedbackLI");
+    expect(emptyLI[0]).toBeInTheDocument();
+  });
+
+  it("should NOT display feedback when there is no messages or feedback", () => {
     const { getByTestId } = render(
       <FeedbackPanel
         feedback={[""]}
-        loading="false"
+        loading={false}
         messages={[]}
         conversation={2}
         conversationList={[1, 2]}

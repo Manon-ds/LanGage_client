@@ -1,4 +1,3 @@
-// TODO: Refactor SVG into paths to use in img elements.
 import RobotPointSVG from "../assets/pointing-robot.svg";
 import RobotThinkSVG from "../assets/thinking-robot.svg";
 import RobotBookSVG from "../assets/book-robot.svg";
@@ -42,12 +41,11 @@ function FeedbackPanel({
             </li>
           ) : (
             feedback.map((str) => {
-              return <li key={feedback.indexOf(str)}>{str}</li>;
+              return <li data-testid="feedbackLI" key={feedback.indexOf(str)}>{str}</li>;
             })
           )}
         </ul>
       </div>
-      {/* // TODO add data-testid to the image, */}
       <div className="tutor">
         {loading ? (
           <img

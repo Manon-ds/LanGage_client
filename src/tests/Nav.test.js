@@ -2,7 +2,7 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import Nav from "../components/Nav";
 
-describe.skip(Nav, () => {
+describe(Nav, () => {
   it("Should render Langage logo", () => {
     const { getByTestId } = render(
       <Nav conversation={1} conversationList={[1, 2, 3, 4]} />
