@@ -1,4 +1,4 @@
-const url = "http://localhost:3007";
+const url = "http://localhost:3006";
 
 async function getPrevMessages(conversationID) {
   try {
@@ -26,12 +26,15 @@ async function gptReply(userInput) {
 
 async function postUserMessage(userInput) {
   try {
+    console.log('api working', userInput)
+
     const response = await fetch(`${url}/messages/user`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userInput),
     });
     const reply = await response.json();
+    // TODO console log
     return reply;
   } catch (e) {
     console.log(e);

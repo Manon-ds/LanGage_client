@@ -1,9 +1,36 @@
 // import { ReactComponent as LogoL } from "../assets/Logo L.svg";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, ChangeEvent } from "react";
 import Messages from "./Messages.jsx";
 import Form from "./Form.jsx";
 import { gptReply, postUserMessage } from "../apiService.js";
 import { splitReply } from "../util.js";
+
+
+interface MessagePanelProps {
+  messages: {
+    _id: string,
+    role: string,
+    content: string,
+    conversationID: number,
+    reply: null | string,
+    timestamp: number,
+    __v: number
+  }[];
+  setMessages: React.Dispatch<React.SetStateAction<{
+    _id: string,
+    role: string,
+    content: string,
+    conversationID: number,
+    reply: null | string,
+    timestamp: number,
+    __v: number
+  }[]>>;
+  setFeedback: React.Dispatch<React.SetStateAction<string>>;
+  conversation: number;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  handleUserMessageClick: () => void;
+}
 
 function MessagePanel({
   messages,
@@ -13,25 +40,28 @@ function MessagePanel({
   loading,
   setLoading,
   handleUserMessageClick,
-}) {
+}: MessagePanelProps) {
+
   const [input, setInput] = useState("");
-  const messageEl = useRef(null);
+  const messageEl = useRef<HTMLDivElement | null>(null);
 
   // apprently Listener for synchronous DOMNodeInserted event is being deprecated? Working but this will need adjustment...
   useEffect(() => {
-    if (messageEl) {
-      messageEl.current.addEventListener("DOMNodeInserted", (event) => {
+    if (messageEl !== null && messageEl.current !== null) {
+      messageEl.current.addEventListener("DOMNodeInserted", (event: Event) => {
         const { currentTarget: target } = event;
-        target.scroll({ top: target.scrollHeight, behavior: "smooth" });
+        if(target instanceof HTMLElement){
+          target.scroll({ top: target.scrollHeight, behavior: "smooth" });
+        }
       });
     }
   }, []);
 
-  function handleChange(event) {
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setInput(event.target.value);
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: ChangeEvent<HTMLInputElement>) {
     try {
       event.preventDefault();
       const inputWithProperties = {
@@ -39,9 +69,20 @@ function MessagePanel({
         content: input,
         conversationID: conversation,
       };
+      console.log('input ', inputWithProperties)
       setInput("");
       setLoading(true);
-      const newMessage = await postUserMessage(inputWithProperties);
+
+      const newMessage: {
+        _id: string,
+        role: string,
+        content: string,
+        conversationID: number,
+        reply: null | string,
+        timestamp: number,
+        __v: number } = await postUserMessage(inputWithProperties);
+        console.log('new message ', newMessage)
+
 
       setMessages((prevMessages) => [...prevMessages, newMessage]);
 
@@ -62,11 +103,12 @@ function MessagePanel({
     <div className="MessagePanel">
       <div className="messages-container" ref={messageEl}>
         {messages?.map((message) => {
+          console.log('message error', messages)
           return (
             <Messages data-testid = 'message'
-              key={message._id}
+              key ={message._id}
               message={message}
-              setFeedback={setFeedback}
+              // setFeedback={setFeedback}
               handleUserMessageClick={handleUserMessageClick}
             />
           );

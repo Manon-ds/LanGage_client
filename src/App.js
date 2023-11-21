@@ -10,7 +10,7 @@ import "./components/Hamburger.css";
 import "./components/popups.css";
 import Nav from "./components/Nav.tsx";
 import FeedbackPanel from "./components/FeedbackPanel.tsx";
-import MessagePanel from "./components/MessagePanel.jsx";
+import MessagePanel from "./components/MessagePanel.tsx";
 import { getPrevMessages } from "./apiService.js";
 import { useState, useEffect } from "react";
 import { splitReply } from "./util.js";
@@ -37,7 +37,6 @@ function App() {
   }, [conversation]);
 
   function handleUserMessageClick(message) {
-    console.log('message ', message)
     if (message && message.includes("(")) {
       const feedback = splitReply(message)[1];
       setFeedback(feedback);
