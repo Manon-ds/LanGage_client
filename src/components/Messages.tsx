@@ -3,30 +3,41 @@ import { splitReply } from "../util.js";
 import { getWordTranslation } from "../apiService.js";
 import Popup from "reactjs-popup";
 
+interface MessageProps {
+    message: {_id: string,
+      role: string,
+      content: string,
+      conversationID: number,
+      reply: null | string,
+      timestamp: number,
+      __v: number},
+    handleUserMessageClick :  (message: string | null) => void
+}
 
-function Messages({ message, handleUserMessageClick }) {
-  const [selectedText, setSelectedText] = useState(null);
-  const [textTranslation, setTextTranslation] = useState(null);
-  const messageContent = splitReply(message.content)[0];
+function Messages({ message, handleUserMessageClick }: MessageProps) {
+  const [selectedText, setSelectedText]= useState<string>('');
+  const [textTranslation, setTextTranslation] = useState<string>('');
+  const messageContent: string = splitReply(message.content)[0];
 
 
-  function handleWordClick(word) {
-    const cleanedWord = word.replace(/[^\w\sÀ-ÖØ-öø-ÿ]/g, "");
+  function handleWordClick(word: string) {
+    const cleanedWord: string = word.replace(/[^\w\sÀ-ÖØ-öø-ÿ]/g, "");
     setSelectedText(cleanedWord);
     getWordTranslation(word)
-      .then((translation) => {
-        const cleanedTranslation = translation.replace(/[^\w\sÀ-ÖØ-öø-ÿ]/g, "");
+      .then((translation: string) => {
+        const cleanedTranslation: string = translation.replace(/[^\w\sÀ-ÖØ-öø-ÿ]/g, "");
         setTextTranslation(cleanedTranslation);
+        return textTranslation;
       })
       .catch((error) => {
         console.error("Error fetching word translation:", error);
       });
   }
 
-  function handleTutorMessageClick(messageToTranslate) {
+  function handleTutorMessageClick(messageToTranslate : string) {
     setSelectedText(messageToTranslate);
     getWordTranslation(messageToTranslate)
-      .then((translation) => {
+      .then((translation: string) => {
         setTextTranslation(translation);
       })
       .catch((error) => {
@@ -39,9 +50,10 @@ function Messages({ message, handleUserMessageClick }) {
       <div
         className={message.role === "user" ? "userM message" : "tutorM message"}
       >
-        <p className="messageContent">
+        <p className="messageContent" data-testid = 'message'>
           {messageContent.split(" ").map((word, index) => (
             <span
+              data-testid = 'word'
               className="word"
               key={index}
               onClick={() => handleWordClick(word)}
@@ -53,6 +65,7 @@ function Messages({ message, handleUserMessageClick }) {
         {message.role === "user" ? (
           <div className="messageFunctions userF">
             <button
+            data-testid = 'feedbackBtn'
               className="functionDesc"
               onClick={() => handleUserMessageClick(message.reply)}
             >
@@ -64,23 +77,24 @@ function Messages({ message, handleUserMessageClick }) {
             className="messageFunctions tutorF"
             onClick={() => handleTutorMessageClick(messageContent)}
           >
-            <button className="functionDesc">Translate message</button>
+            <button data-testid = 'translateBtn' className="functionDesc">Translate message</button>
           </div>
         )}
       </div>
 
-      <Popup open={selectedText !== null} onClose={() => setSelectedText(null)}>
+      <Popup open={selectedText !== ''} onClose={() => setSelectedText('')}>
         <div className="translationPopUp popUpMenu">
-          <h2 className="translationTitle">
-            {selectedText !== null && selectedText.length > 10
+          <h2 data-testid = 'popup' className="translationTitle">
+            {selectedText !== '' && selectedText.length > 10
               ? "Translation"
               : "Translation of " + selectedText}
           </h2>
           <p className="translatedText">{textTranslation}</p>
           <div className="closeButtonContainer">
             <button
+              data-testid = 'popupClose'
               className="closeButton"
-              onClick={() => setSelectedText(null)}
+              onClick={() => setSelectedText('')}
             >
               Close
             </button>

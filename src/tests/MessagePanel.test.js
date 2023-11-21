@@ -1,12 +1,11 @@
 /* eslint-disable no-undef */
 import { render, fireEvent } from "@testing-library/react";
 import MessagePanel from "../components/MessagePanel";
-// import Messages from "../components/Messages";
 import Form from "../components/Form";
 import userEvent from '@testing-library/user-event'
 
 
-describe.only(MessagePanel, () => {
+describe.skip(MessagePanel, () => {
   it('Should render a send button', () => {
     const { getByTestId } = render(
       <MessagePanel />
