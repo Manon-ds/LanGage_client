@@ -1,6 +1,5 @@
-// import { ReactComponent as LogoL } from "../assets/Logo L.svg";
 import { useState, useEffect, useRef, ChangeEvent } from "react";
-import Messages from "./Messages.jsx";
+import Messages from "./Messages";
 import Form from "./Form.jsx";
 import { gptReply, postUserMessage } from "../apiService.js";
 import { splitReply } from "../util.js";
@@ -69,7 +68,6 @@ function MessagePanel({
         content: input,
         conversationID: conversation,
       };
-      console.log('input ', inputWithProperties)
       setInput("");
       setLoading(true);
 
@@ -81,19 +79,16 @@ function MessagePanel({
         reply: null | string,
         timestamp: number,
         __v: number } = await postUserMessage(inputWithProperties);
-        console.log('new message ', newMessage)
-
 
       setMessages((prevMessages) => [...prevMessages, newMessage]);
-
       const response = await gptReply(newMessage);
       if (response.content.includes("(")) {
         const feedback = splitReply(response.content)[1];
         setFeedback(feedback);
       }
       setMessages((prevMessages) => [...prevMessages, response]);
-
       setLoading(false);
+
     } catch (e) {
       console.log(e);
     }
@@ -103,12 +98,12 @@ function MessagePanel({
     <div className="MessagePanel">
       <div className="messages-container" ref={messageEl}>
         {messages?.map((message) => {
-          console.log('message error', messages)
+            console.log('message ',message)
+
           return (
             <Messages data-testid = 'message'
               key ={message._id}
               message={message}
-              // setFeedback={setFeedback}
               handleUserMessageClick={handleUserMessageClick}
             />
           );
