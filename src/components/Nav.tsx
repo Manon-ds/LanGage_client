@@ -4,6 +4,13 @@ import { ConvoPropTypes } from "../../propTypes"
 import Hamburger from "./Hamburger";
 import Popup from "reactjs-popup";
 
+// interface NavProps {
+//   conversation: number,
+//   setConversation: React.Dispatch<React.SetStateAction<number>>,
+//   conversationList: number[],
+//   setConversationList: React.Dispatch<React.SetStateAction<number[]>>
+// }
+
 function Nav({
   conversation,
   setConversation,

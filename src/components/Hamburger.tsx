@@ -10,7 +10,7 @@ function Hamburger({
 }: ConvoPropTypes) {
   useEffect(() => {
     getConvoList()
-      .then((data: number) => {
+      .then((data: number[]) => {
         setConversationList(data);
       })
       .catch((e) => console.log(e));

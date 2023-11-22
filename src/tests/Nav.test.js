@@ -19,7 +19,7 @@ describe(Nav, () => {
     expect(hamburger).toBeInTheDocument();
   });
 
-  it.skip("should open popup menu on click", () => {
+  it("should open popup menu on click", () => {
     const { getByTestId } = render(
       <Nav conversation={1} conversationList={[1]} />
     );
@@ -30,7 +30,7 @@ describe(Nav, () => {
     expect(popMenu).toBeInTheDocument();
   });
 
-  it.skip("should render a new converstion when 'Start new conversation' clicked", () => {
+  it("should render a new converstion when 'Start new conversation' clicked", () => {
     const { getByTestId, getByText } = render(
       <Nav conversation={1} conversationList={[1, 2, 3]} />
     );

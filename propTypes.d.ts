@@ -16,7 +16,7 @@ export type PropTypes = {
   loading: boolean;
   setLoading: (value: boolean) => void;
   conversationList: number[];
-  setConversationList: (value: number) => void;
+  setConversationList: (value: number[]) => void;
 }
 
 
@@ -24,5 +24,5 @@ export type ConvoPropTypes = {
   conversation: number;
   setConversation: (value: number) => void;
   conversationList: number[];
-  setConversationList: (value: number) => void;
+  setConversationList: (value: number[]) => void;
 }

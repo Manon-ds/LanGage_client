@@ -28,7 +28,7 @@ interface MessagePanelProps {
   conversation: number;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  handleUserMessageClick: () => void;
+  handleUserMessageClick: (message: string | null) => void;
 }
 
 function MessagePanel({
