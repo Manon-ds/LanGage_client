@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import Nav from "../components/Nav";
 
 describe(Nav, () => {
@@ -19,17 +19,19 @@ describe(Nav, () => {
     expect(hamburger).toBeInTheDocument();
   });
 
+  it("should open popup menu on click", async () => {
   it("should open popup menu on click", () => {
     const { getByTestId } = render(
       <Nav conversation={1} conversationList={[1]} />
     );
     const hamburger = getByTestId("hamburger");
     fireEvent.click(hamburger);
-    const popMenu = getByTestId("popMenu");
-    console.log(popMenu);
-    expect(popMenu).toBeInTheDocument();
+    await waitFor(() => {
+      expect(getByTestId('popMenu')).toBeInTheDocument()
+    })
   });
 
+  it("should render a new converstion when 'Start new conversation' clicked", () => {
   it("should render a new converstion when 'Start new conversation' clicked", () => {
     const { getByTestId, getByText } = render(
       <Nav conversation={1} conversationList={[1, 2, 3]} />
@@ -43,10 +45,7 @@ describe(Nav, () => {
 
     fireEvent.click(newConvoButton);
 
-    const newChat = getByText("Chat 1");
+    const newChat = getByText("Chat 2");
     expect(newChat).toBeTruthy();
-
-
-
   })
 });

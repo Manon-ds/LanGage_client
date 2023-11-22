@@ -8,9 +8,15 @@ import "./components/FeedbackPanel.css";
 import "./components/Messages.css";
 import "./components/Hamburger.css";
 import "./components/popups.css";
+<<<<<<< HEAD:src/App.tsx
 import Nav from "./components/Nav";
 import FeedbackPanel from "./components/FeedbackPanel.jsx";
 import MessagePanel from "./components/MessagePanel";
+=======
+import Nav from "./components/Nav.tsx";
+import FeedbackPanel from "./components/FeedbackPanel.tsx";
+import MessagePanel from "./components/MessagePanel.tsx";
+>>>>>>> 760266bf69b9891fcf4370ce8a0ecc931134f1fd:src/App.js
 import { getPrevMessages } from "./apiService.js";
 import { useState, useEffect } from "react";
 import { splitReply } from "./util.js";

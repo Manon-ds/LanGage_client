@@ -19,6 +19,14 @@ export type PropTypes = {
   setConversationList: (value: number[]) => void;
 }
 
+export type FeedbackTypes = {
+conversation: number;
+messages: Message[];
+feedback: string[];
+loading: boolean;
+conversationList: number[];
+}
+
 
 export type ConvoPropTypes = {
   conversation: number;
