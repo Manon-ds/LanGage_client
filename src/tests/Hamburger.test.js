@@ -1,6 +1,6 @@
-import { render } from "@testing-library/react";
-import Hamburger from "../components/Hamburger";
+// import { render } from "@testing-library/react";
+// import Hamburger from "../components/Hamburger";
 
-describe(Hamburger, () => {
+// describe(Hamburger, () => {
 
-}
+// }
